@@ -34,7 +34,7 @@ namespace NovaPP
                 "FROM " +
                     "Vlasnik INNER JOIN Vozilo ON Vlasnik.ID = Vozilo.VlasnikID " +
                     "INNER JOIN Boja ON Vozilo.BojaID = Boja.ID " +
-                    "WHERE (Vozilo.RegOzn = '@regOzn');";
+                    "WHERE (Vozilo.RegOzn = @regOzn);";
 
             try
             {
@@ -48,7 +48,7 @@ namespace NovaPP
                 conn.Open();
 
                 SqlCeDataReader reader = cmd.ExecuteReader();
-                if (reader.HasRows)
+                if (reader.Read())
                 {
                     lblBojaValue.Text = reader["Boja"].ToString();
                     lblDatRegValue.Text = Convert.ToDateTime(reader["Datum registracije"], new CultureInfo("hr-HR")).ToShortDateString();

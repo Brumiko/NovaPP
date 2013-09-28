@@ -76,6 +76,7 @@ namespace NovaPP
             SqlCeConnection conn = new SqlCeConnection(Program.ConnString);
             string sqlQry =
                 "SELECT " +
+                    "ID, " +
                     "Ime, " +
                     "Prezime " +
                 "FROM " +
@@ -94,7 +95,7 @@ namespace NovaPP
                 conn.Open();
 
                 SqlCeDataReader reader = cmd.ExecuteReader();
-                if (reader.HasRows)
+                if (reader.Read())
                 {
                     lblVozacIliPoruka.Text = reader["Ime"].ToString() + " " + reader["Prezime"].ToString();
                     intVozacID = Convert.ToInt32(reader["ID"]);
